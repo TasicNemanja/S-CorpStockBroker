@@ -56,11 +56,55 @@ public class SCorpTests {
         stockBrokerDashboard = new StockBrokerDashboard(driver);
         stockBrokerLoginPage = new StockBrokerLoginPage(driver);
 
-        //Verify That User Cannot Proceed To Dashboard if he do not submit required fields
+        //Verify That User Cannot Proceed To Dashboard If He Do Not Submit Required Fields.
         stockBrokerLoginPage.verifyThatLoginButtonIsDisabledIfEmailOrPasswordIsBlank();
 
-        stockBrokerLoginPage.submitEmail("test.com");
-        stockBrokerLoginPage.submitPassword("123456");
+
+        //Verify That User Cannot Proceed To Dashboard If He Submit Only Email.
+        stockBrokerLoginPage.submitEmail("stock.app.284@gmail.com");
+        stockBrokerLoginPage.verifyEmptyPasswordErrorIsPresent();
+
+
+        //Verify That User Cannot Proceed To Dashboard If He Submit Only Password.
+        stockBrokerLoginPage.submitPassword(" #kyle713!");
+        stockBrokerLoginPage.verifyEmptyEmailErrorIsPresent();
+
+
+        //Verify That User Cannot Proceed To Dashboard If He Submit Invalid Email Format.
+        stockBrokerLoginPage.submitEmail("stock.app.284gmail.com");
+        stockBrokerLoginPage.submitPassword("kyle713!");
+        stockBrokerLoginPage.verifyInvalidEmailFormat();
+
+        stockBrokerLoginPage.submitEmail("stock@app@284gmail.com");
+        stockBrokerLoginPage.submitPassword("kyle713!");
+        stockBrokerLoginPage.verifyInvalidEmailFormat();
+
+        stockBrokerLoginPage.submitEmail("stock.app.284@gmail");
+        stockBrokerLoginPage.submitPassword("kyle713!");
+        stockBrokerLoginPage.verifyInvalidEmailFormat();
+
+        stockBrokerLoginPage.submitEmail("stock.app.284.gmail@com");
+        stockBrokerLoginPage.submitPassword("kyle713!");
+        stockBrokerLoginPage.verifyInvalidEmailFormat();
+
+
+        //Verify That User Cannot Proceed To Dashboard If He Submit Invalid Password Format.
+        stockBrokerLoginPage.submitEmail("stock.app.284@gmail.com");
+        stockBrokerLoginPage.submitPassword("123");
+        stockBrokerLoginPage.verifyInvalidPasswordFormat();
+
+
+        //Verify That User Cannot Proceed To Dashboard If He Submit Wrong Credentials.
+        stockBrokerLoginPage.submitEmail("test@gmail.com");
+        stockBrokerLoginPage.submitPassword("kyle713!");
+        stockBrokerLoginPage.verifyInvalidCredentials();
+
+        stockBrokerLoginPage.submitEmail("stock.app.284@gmail.com");
+        stockBrokerLoginPage.submitPassword("1234523!");
+        stockBrokerLoginPage.verifyInvalidCredentials();
+
+        //Verify That User Can Login And Proceed To Dashboard If He Submit Valid Credentials.
+
 
     }
 
