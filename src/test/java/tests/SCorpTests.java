@@ -62,12 +62,12 @@ public class SCorpTests {
 
         //Verify That User Cannot Proceed To Dashboard If He Submit Only Email.
         stockBrokerLoginPage.submitEmail("stock.app.284@gmail.com");
-        stockBrokerLoginPage.verifyEmptyPasswordErrorIsPresent();
+        stockBrokerLoginPage.verifyThatLoginButtonIsDisabledIfEmailOrPasswordIsBlank();
 
 
         //Verify That User Cannot Proceed To Dashboard If He Submit Only Password.
         stockBrokerLoginPage.submitPassword(" #kyle713!");
-        stockBrokerLoginPage.verifyEmptyEmailErrorIsPresent();
+        stockBrokerLoginPage.verifyThatLoginButtonIsDisabledIfEmailOrPasswordIsBlank();
 
 
         //Verify That User Cannot Proceed To Dashboard If He Submit Invalid Email Format.
