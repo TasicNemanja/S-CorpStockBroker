@@ -56,24 +56,21 @@ public class SCorpTests {
         stockBrokerDashboard = new StockBrokerDashboard(driver);
         stockBrokerLoginPage = new StockBrokerLoginPage(driver);
 
-        //Verify That User Cannot Proceed To Dashboard If He Do Not Submit Required Fields.
-        stockBrokerLoginPage.verifyThatLoginButtonIsDisabledIfEmailOrPasswordIsBlank();
 
 
         //Verify That User Cannot Proceed To Dashboard If He Submit Only Email.
         stockBrokerLoginPage.submitEmail("stock.app.284@gmail.com");
-        stockBrokerLoginPage.verifyThatLoginButtonIsDisabledIfEmailOrPasswordIsBlank();
 
 
         //Verify That User Cannot Proceed To Dashboard If He Submit Only Password.
         stockBrokerLoginPage.submitPassword(" #kyle713!");
-        stockBrokerLoginPage.verifyThatLoginButtonIsDisabledIfEmailOrPasswordIsBlank();
 
 
         //Verify That User Cannot Proceed To Dashboard If He Submit Invalid Email Format.
         stockBrokerLoginPage.submitEmail("stock.app.284gmail.com");
         stockBrokerLoginPage.submitPassword("kyle713!");
         stockBrokerLoginPage.verifyInvalidEmailFormat();
+
 
         stockBrokerLoginPage.submitEmail("stock@app@284gmail.com");
         stockBrokerLoginPage.submitPassword("kyle713!");
@@ -108,9 +105,9 @@ public class SCorpTests {
 
     }
 
-    @AfterMethod
-    public void tearDown(){
-        driverManager.quitWebDriver();
-    }
+//    @AfterMethod
+//    public void tearDown(){
+//        driverManager.quitWebDriver();
+//    }
 
 }

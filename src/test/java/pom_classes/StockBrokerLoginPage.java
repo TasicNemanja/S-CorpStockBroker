@@ -30,17 +30,18 @@ public class StockBrokerLoginPage extends StockBrokerCommon{
     WebElement passwordErrorMessage;
     @FindBy (xpath = "//a[@class=\"forgot-password\"]")
     WebElement forgotPassword;
-    @FindBy (xpath = "//button[@class=\"status-success appearance-filled full-width size-medium shape-rectangle btn-disabled nb-transition\"]")
+    @FindBy (xpath = "/html/body/ngx-app/nb-auth/nb-layout/div/div/div/div/div/nb-layout-column/nb-card/nb-card-body/nb-auth-block/ngx-login/form/button")
     WebElement logInButton;
     @FindBy (xpath = "//p[@class=\"alert-title\"]")
     WebElement credentialErrorTitle;
     @FindBy (xpath = "//button[@class=\"status-success appearance-filled full-width size-medium shape-rectangle btn-disabled nb-transition\"]")
     WebElement credentialErrorMessage;
 
+
     //Assertion that login is present
     public void verifyThatLoginPageIsPresent (){
 
-       // Assert.assertTrue(Boolean.parseBoolean(driver.getCurrentUrl()), "http://34.227.177.61/auth/login");
+        Assert.assertEquals(driver.getCurrentUrl(),"http://34.227.177.61/auth/login");
         waiting(title);
         Assert.assertEquals(title.getText(), "Login");
         waiting(subTitle);
@@ -54,14 +55,6 @@ public class StockBrokerLoginPage extends StockBrokerCommon{
 
     }
 
-    //Assertion for login button (DISABLED)
-    public void verifyThatLoginButtonIsDisabledIfEmailOrPasswordIsBlank (){
-
-        Assert.assertTrue(logInButton.isDisplayed());
-
-
-
-    }
 
     //Assertion for login button (ENABLED)
     public void verifyThatLoginButtonIsEnabled (){
