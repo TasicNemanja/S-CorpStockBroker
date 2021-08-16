@@ -1,7 +1,9 @@
 package pom_classes;
 
+import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -49,9 +51,24 @@ public class StockBrokerCommon {
 
 
     public void waiting(WebElement element){
+        try {
+            WebDriverWait wait = new WebDriverWait(driver,WAIT);
+            wait.until(ExpectedConditions.visibilityOf(element));
+            wait.until(ExpectedConditions.elementToBeClickable(element));
 
-        WebDriverWait wait = new WebDriverWait(driver,WAIT);
-        wait.until(ExpectedConditions.visibilityOf(element));
+            try {
+                Actions actions = new Actions(driver);
+                actions.moveToElement(element);
+                actions.build().perform();
+                actions.click();
+            } catch (StaleElementReferenceException e) {
+                element.click();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
 
 
     }
