@@ -54,7 +54,6 @@ public class StockBrokerCommon {
         try {
             WebDriverWait wait = new WebDriverWait(driver,WAIT);
             wait.until(ExpectedConditions.visibilityOf(element));
-            wait.until(ExpectedConditions.elementToBeClickable(element));
 
             try {
                 Actions actions = new Actions(driver);

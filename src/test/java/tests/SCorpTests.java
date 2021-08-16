@@ -64,21 +64,21 @@ public class SCorpTests {
 
         //Verify That User Cannot Proceed To Dashboard If He Submit Only Password.
         stockBrokerLoginPage.clearEmail();
-        stockBrokerLoginPage.submitPassword(" #kyle713!");
+        stockBrokerLoginPage.submitPassword("C3rb3rus");
 
 
         //Verify That User Cannot Proceed To Dashboard If He Submit Invalid Email Format.
         stockBrokerLoginPage.submitEmail("stock.app.284gmail.com");
-        stockBrokerLoginPage.submitPassword("kyle713!");
+        stockBrokerLoginPage.submitPassword("C3rb3rus");
         stockBrokerLoginPage.verifyInvalidEmailFormat();
 
 
         stockBrokerLoginPage.submitEmail("stock.app.284@gmail");
-        stockBrokerLoginPage.submitPassword("kyle713!");
+        stockBrokerLoginPage.submitPassword("C3rb3rus");
         stockBrokerLoginPage.verifyInvalidEmailFormat();
 
         stockBrokerLoginPage.submitEmail("stock.app.284.gmail@com");
-        stockBrokerLoginPage.submitPassword("kyle713!");
+        stockBrokerLoginPage.submitPassword("C3rb3rus");
         stockBrokerLoginPage.verifyInvalidEmailFormat();
 
 
@@ -90,7 +90,7 @@ public class SCorpTests {
 
         //Verify That User Cannot Proceed To Dashboard If He Submit Wrong Credentials.
         stockBrokerLoginPage.submitEmail("test@gmail.com");
-        stockBrokerLoginPage.submitPassword("kyle713!");
+        stockBrokerLoginPage.submitPassword("C3rb3rus");
         stockBrokerLoginPage.clickLoginButton();
         stockBrokerLoginPage.verifyInvalidCredentials();
 
@@ -100,8 +100,9 @@ public class SCorpTests {
         stockBrokerLoginPage.verifyInvalidCredentials();
 
         //Verify That User Can Login And Proceed To Dashboard If He Submit Valid Credentials.
-
-
+        stockBrokerLoginPage.submitEmail("stock.app.284@gmail.com");
+        stockBrokerLoginPage.submitPassword("C3rb3rus");
+        stockBrokerLoginPage.clickLoginButton();
     }
 
     @AfterMethod
