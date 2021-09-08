@@ -29,13 +29,14 @@ public class StockBrokerCommon {
     @FindBy(xpath = "//input[@class=\"search-input\"]")
     WebElement searchInput;
     @FindBy(xpath = "//div[@class=\"user-picture initials ng-star-inserted\"]")
-    WebElement usermenuIcon;
+    WebElement userMenuIcon;
     @FindBy(xpath = "//nb-icon[@class=\"menu-icon ng-tns-c81-0 ng-star-inserted\"]")
     WebElement commandsIcon;
     @FindBy(xpath = "//nb-icon[@class=\"menu-icon ng-tns-c81-1 ng-star-inserted\"]")
     WebElement positionsIcon;
     @FindBy(xpath = "//span[@class=\"created-by\"]")
     WebElement footer;
+
 
 
 
@@ -48,8 +49,6 @@ public class StockBrokerCommon {
         element.click();
 
     }
-
-
     public void waiting(WebElement element){
         try {
             WebDriverWait wait = new WebDriverWait(driver,WAIT);
@@ -70,6 +69,10 @@ public class StockBrokerCommon {
 
 
 
+    }
+    public void backToDashBoard(){
+        waiting(logo);
+        clickOnElement(logo);
     }
 
 

@@ -40,13 +40,9 @@ public class SCorpTests {
     @Test
     public void verifyThatLoginPageIsLoaded() {
 
-    stockBrokerCommon = new StockBrokerCommon(driver);
-    stockBrokerDashboard = new StockBrokerDashboard(driver);
     stockBrokerLoginPage = new StockBrokerLoginPage(driver);
 
     stockBrokerLoginPage.verifyThatLoginPageIsPresent();
-
-
     }
 
     @Test
@@ -56,22 +52,17 @@ public class SCorpTests {
         stockBrokerDashboard = new StockBrokerDashboard(driver);
         stockBrokerLoginPage = new StockBrokerLoginPage(driver);
 
-
-
         //Verify That User Cannot Proceed To Dashboard If He Submit Only Email.
         stockBrokerLoginPage.submitEmail("stock.app.284@gmail.com");
-
 
         //Verify That User Cannot Proceed To Dashboard If He Submit Only Password.
         stockBrokerLoginPage.clearEmail();
         stockBrokerLoginPage.submitPassword("C3rb3rus");
 
-
         //Verify That User Cannot Proceed To Dashboard If He Submit Invalid Email Format.
         stockBrokerLoginPage.submitEmail("stock.app.284gmail.com");
         stockBrokerLoginPage.submitPassword("C3rb3rus");
         stockBrokerLoginPage.verifyInvalidEmailFormat();
-
 
         stockBrokerLoginPage.submitEmail("stock.app.284@gmail");
         stockBrokerLoginPage.submitPassword("C3rb3rus");
@@ -81,12 +72,10 @@ public class SCorpTests {
         stockBrokerLoginPage.submitPassword("C3rb3rus");
         stockBrokerLoginPage.verifyInvalidEmailFormat();
 
-
         //Verify That User Cannot Proceed To Dashboard If He Submit Invalid Password Format.
         stockBrokerLoginPage.submitEmail("stock.app.284@gmail.com");
         stockBrokerLoginPage.submitPassword("123");
         stockBrokerLoginPage.verifyInvalidPasswordFormat();
-
 
         //Verify That User Cannot Proceed To Dashboard If He Submit Wrong Credentials.
         stockBrokerLoginPage.submitEmail("test@gmail.com");
@@ -103,6 +92,21 @@ public class SCorpTests {
         stockBrokerLoginPage.submitEmail("stock.app.284@gmail.com");
         stockBrokerLoginPage.submitPassword("C3rb3rus");
         stockBrokerLoginPage.clickLoginButton();
+        stockBrokerDashboard.verifyThatUserIsOnDashboardPage();
+    }
+
+    @Test
+    public void dashBoardPageTests(){
+
+        stockBrokerLoginPage = new StockBrokerLoginPage(driver);
+        stockBrokerDashboard = new StockBrokerDashboard(driver);
+        stockBrokerCommandPage = new StockBrokerCommandPage(driver);
+
+
+        stockBrokerLoginPage.logInToDashboard();
+        stockBrokerDashboard.verifyThatDashBoardIconsArePresent();
+        stockBrokerDashboard.verifyThatUserCanTriggerMenuSideBar();
+
     }
 
     @AfterMethod

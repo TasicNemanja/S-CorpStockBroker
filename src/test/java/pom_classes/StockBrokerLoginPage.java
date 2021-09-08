@@ -95,7 +95,6 @@ public class StockBrokerLoginPage extends StockBrokerCommon{
     public void verifyInvalidCredentials (){
         WebDriverWait wait = new WebDriverWait(driver,WAIT);
         wait.until(ExpectedConditions.visibilityOfAllElements(credentialErrorTitle,credentialErrorMessage));
-//        Assert.assertEquals(credentialErrorTitle.getText(),"Oh snap!");
         Assert.assertEquals(credentialErrorMessage.getText(),"We could not verify your credentials. Please double-check and try again.");
 
     }
@@ -125,18 +124,15 @@ public class StockBrokerLoginPage extends StockBrokerCommon{
         clickOnElement(logInButton);
     }
 
-
-    //Clear Element
-
-
-
     public void clearEmail() {
 
         emailInputBar.clear();
     }
 
-    public void clearPassword() {
-
-        passwordInputBar.clear();
+    public void logInToDashboard(){
+        submitEmail("stock.app.284@gmail.com");
+        submitPassword("C3rb3rus");
+        clickLoginButton();
     }
+
 }
