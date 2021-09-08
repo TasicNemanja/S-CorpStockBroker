@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 public class StockBrokerCommon {
     WebDriver driver;
@@ -36,6 +37,10 @@ public class StockBrokerCommon {
     WebElement positionsIcon;
     @FindBy(xpath = "//span[@class=\"created-by\"]")
     WebElement footer;
+    @FindBy (xpath = "//a[@title=\"Profile\"]")
+    WebElement profileIcon;
+    @FindBy (css = "[data-name=\"close\"]")
+    WebElement closeSearch;
 
 
 
@@ -48,6 +53,11 @@ public class StockBrokerCommon {
         wait.until(ExpectedConditions.elementToBeClickable(element));
         element.click();
 
+    }
+    public void hoverOverElement(WebElement element){
+        Actions actions = new Actions(driver);
+        waiting(element);
+        actions.moveToElement(element).build().perform();
     }
     public void waiting(WebElement element){
         try {
@@ -73,6 +83,20 @@ public class StockBrokerCommon {
     public void backToDashBoard(){
         waiting(logo);
         clickOnElement(logo);
+    }
+    public void verifyCommons(){
+        Assert.assertTrue(logo.isDisplayed());
+        Assert.assertTrue(logo.isEnabled());
+        Assert.assertTrue(sidebarToggle.isDisplayed());
+        Assert.assertTrue(sidebarToggle.isEnabled());
+        Assert.assertTrue(searchIcon.isDisplayed());
+        Assert.assertTrue(searchIcon.isEnabled());
+        Assert.assertTrue(userMenuIcon.isDisplayed());
+        Assert.assertTrue(userMenuIcon.isEnabled());
+        Assert.assertTrue(footer.isDisplayed());
+    }
+    public void closeSearch() {
+        clickOnElement(closeSearch);
     }
 
 

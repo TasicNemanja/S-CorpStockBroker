@@ -32,9 +32,9 @@ public class StockBrokerLoginPage extends StockBrokerCommon{
     WebElement forgotPassword;
     @FindBy (xpath = "/html/body/ngx-app/nb-auth/nb-layout/div/div/div/div/div/nb-layout-column/nb-card/nb-card-body/nb-auth-block/ngx-login/form/button")
     WebElement logInButton;
-    @FindBy (css = "html>body>ngx-app>nb-auth>nb-layout>div>div>div>div>div>nb-layout-column>nb-card>nb-card-body>nb-auth-block>ngx-login>nb-alert>p>b")
+    @FindBy (xpath = "//p[@class='alert-title']//b[1]")
     WebElement credentialErrorTitle;
-    @FindBy (css = "html>body>ngx-app>nb-auth>nb-layout>div>div>div>div>div>nb-layout-column>nb-card>nb-card-body>nb-auth-block>ngx-login>nb-alert>ul>li")
+    @FindBy (xpath = "//ul[@class='alert-message-list']//li[1]")
     WebElement credentialErrorMessage;
 
 

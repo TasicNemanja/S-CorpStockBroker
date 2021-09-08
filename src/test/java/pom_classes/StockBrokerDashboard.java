@@ -1,7 +1,6 @@
 package pom_classes;
 
 import org.openqa.selenium.WebDriver;
-
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -30,15 +29,19 @@ public class StockBrokerDashboard extends StockBrokerCommon{
     WebElement welcomeText2;
     @FindBy (xpath = "//p[text()=' If you want to look up a stock, click on the magnifying glass and Search for the Stock Symbol you want to check out.']")
     WebElement welcomeText3;
+    @FindBy (css = "[class=\"menu-sidebar left compacted\"]")
+    WebElement sideBarCompact;
+    @FindBy (css = "[class=\"menu-sidebar left expanded\"]")
+    WebElement sideBarExpended;
+
+
 
 
 
 
     public void verifyThatUserIsOnDashboardPage (){
-        WebDriverWait wait = new WebDriverWait(driver, WAIT);
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-        wait.until(ExpectedConditions.visibilityOf(logo));
-
+        waiting(logo);
+        verifyCommons();
         Assert.assertEquals(driver.getCurrentUrl(), "http://34.227.177.61/pages/dashboard");
         Assert.assertEquals(driver.getTitle(), "Stock Broker");
         Assert.assertEquals(welcomeTextHeader.getText(), "Welcome to Stock Broker test enviroment.");
@@ -64,18 +67,39 @@ public class StockBrokerDashboard extends StockBrokerCommon{
 
     public void verifyThatUserIsAbleToGoToCommandsPage(){
         clickOnElement(commandsIcon);
+        Assert.assertEquals(driver.getCurrentUrl(),"http://34.227.177.61/pages/commands");
+        verifyCommons();
+    }
+
+    public void verifyThatUserIsAbleToGoToPositionsPage(){
+        clickOnElement(positionsIcon);
+        Assert.assertEquals(driver.getCurrentUrl(),"http://34.227.177.61/pages/positions");
+        verifyCommons();
     }
 
     public void verifyThatUserIsAbleToGoToUserPage(){
+
         clickOnElement(userMenuIcon);
+        hoverOverElement(profileIcon);
+        clickOnElement(profileIcon);
+        Assert.assertEquals(driver.getCurrentUrl(), "http://34.227.177.61/pages/profile");
+
     }
 
     public void verifyThatUserIsAbleToAccessSearchBar(){
         clickOnElement(searchIcon);
+        Assert.assertTrue(searchInput.isDisplayed());
+        Assert.assertTrue(searchInput.isEnabled());
     }
 
     public void verifyThatUserCanTriggerMenuSideBar(){
         clickOnElement(sidebarToggle);
+        WebDriverWait wait = new WebDriverWait(driver, WAIT);
+        wait.until(ExpectedConditions.visibilityOf(sideBarCompact));
+        Assert.assertTrue(sideBarCompact.isDisplayed());
+        clickOnElement(sidebarToggle);
+        wait.until(ExpectedConditions.visibilityOf(sideBarExpended));
+        Assert.assertTrue(sideBarExpended.isDisplayed());
 
     }
 

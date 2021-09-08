@@ -6,10 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import pom_classes.StockBrokerCommandPage;
-import pom_classes.StockBrokerCommon;
-import pom_classes.StockBrokerDashboard;
-import pom_classes.StockBrokerLoginPage;
+import pom_classes.*;
 
 
 import java.util.concurrent.TimeUnit;
@@ -25,6 +22,8 @@ public class SCorpTests {
     StockBrokerCommandPage stockBrokerCommandPage;
     StockBrokerDashboard stockBrokerDashboard;
     StockBrokerLoginPage stockBrokerLoginPage;
+    StockBrokerProfilePage stockBrokerProfile;
+    StockBrokerPositions stockBrokerPositions;
 
 
     @BeforeMethod
@@ -46,7 +45,7 @@ public class SCorpTests {
     }
 
     @Test
-    public void verifyThatUserIsAbleToLoginWithValidCredentials() {
+    public void loginPageTests() {
 
         stockBrokerCommon = new StockBrokerCommon(driver);
         stockBrokerDashboard = new StockBrokerDashboard(driver);
@@ -101,11 +100,27 @@ public class SCorpTests {
         stockBrokerLoginPage = new StockBrokerLoginPage(driver);
         stockBrokerDashboard = new StockBrokerDashboard(driver);
         stockBrokerCommandPage = new StockBrokerCommandPage(driver);
+        stockBrokerProfile = new StockBrokerProfilePage(driver);
+        stockBrokerPositions = new StockBrokerPositions(driver);
 
 
         stockBrokerLoginPage.logInToDashboard();
         stockBrokerDashboard.verifyThatDashBoardIconsArePresent();
+
         stockBrokerDashboard.verifyThatUserCanTriggerMenuSideBar();
+
+        stockBrokerDashboard.verifyThatUserIsAbleToGoToCommandsPage();
+        stockBrokerCommandPage.backToDashBoard();
+
+        stockBrokerDashboard.verifyThatUserIsAbleToGoToPositionsPage();
+        stockBrokerPositions.backToDashBoard();
+
+        stockBrokerDashboard.verifyThatUserIsAbleToGoToUserPage();
+        stockBrokerProfile.backToDashBoard();
+
+        stockBrokerDashboard.verifyThatUserIsAbleToAccessSearchBar();
+        stockBrokerDashboard.closeSearch();
+
 
     }
 
