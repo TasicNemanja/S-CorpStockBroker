@@ -124,6 +124,36 @@ public class SCorpTests {
 
     }
 
+    @Test
+    public void profilePageTests(){
+        stockBrokerLoginPage = new StockBrokerLoginPage(driver);
+        stockBrokerDashboard = new StockBrokerDashboard(driver);
+        stockBrokerProfile = new StockBrokerProfilePage(driver);
+        stockBrokerCommon = new StockBrokerCommon(driver);
+
+        stockBrokerLoginPage.logInToDashboard();
+        stockBrokerDashboard.accessProfileSettings();
+
+        stockBrokerProfile.changeFirstName("Test");
+        stockBrokerProfile.changeFirstName("Kyle");
+
+        stockBrokerProfile.changeLastName("Test");
+        stockBrokerProfile.changeLastName("Summers");
+
+        stockBrokerProfile.changeEmail("test@test.com");
+        stockBrokerProfile.changeEmail("stock.app.284@gmail.com");
+
+        stockBrokerProfile.verifyThatUserCantChangePasswordWithEmptyFields();
+        stockBrokerProfile.verifyThatUserCanNotChangePasswordWithInvalidPassFormat("1234");
+        stockBrokerProfile.verifyThatUserCanNotChangePasswordWithInvalidPassFormat("qwert");
+        stockBrokerProfile.verifyThatUserCanNotChangePasswordWithInvalidPassFormat("SDFS");
+        stockBrokerProfile.verifyThatUserIsAbleToChangePassword("Test123");
+        stockBrokerProfile.verifyThatUserIsAbleToChangePassword("C3rb3rus");
+
+
+
+    }
+
     @AfterMethod
     public void tearDown(){
         driverManager.quitWebDriver();

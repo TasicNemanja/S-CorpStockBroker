@@ -103,6 +103,12 @@ public class StockBrokerDashboard extends StockBrokerCommon{
 
     }
 
+    public void accessProfileSettings(){
+        clickOnElement(userMenuIcon);
+        clickOnElement(profileIcon);
+
+    }
+
 
 
 

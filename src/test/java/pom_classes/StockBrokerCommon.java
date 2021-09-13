@@ -10,6 +10,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import static java.awt.SystemColor.text;
+
 public class StockBrokerCommon {
     WebDriver driver;
     int WAIT = 20;
@@ -41,11 +43,32 @@ public class StockBrokerCommon {
     WebElement profileIcon;
     @FindBy (css = "[data-name=\"close\"]")
     WebElement closeSearch;
+    @FindBy (xpath = "//body[@class=\"pace-done nb-theme-default\"]")
+    WebElement assertDefaultTheme;
+    @FindBy (xpath = "//body[@class=\"pace-done nb-theme-dark\"]")
+    WebElement assertDarkTheme;
+    @FindBy (xpath = "//body[@class=\"pace-done nb-theme-cosmic\"]")
+    WebElement assertCosmicTheme;
+    @FindBy (xpath = "//body[@class=\"pace-done nb-theme-corporate\"]")
+    WebElement assertCorporateTheme;
+
+
 
 
 
 
     //Method for clicking on elements
+    public void verifyCommons(){
+        Assert.assertTrue(logo.isDisplayed());
+        Assert.assertTrue(logo.isEnabled());
+        Assert.assertTrue(sidebarToggle.isDisplayed());
+        Assert.assertTrue(sidebarToggle.isEnabled());
+        Assert.assertTrue(searchIcon.isDisplayed());
+        Assert.assertTrue(searchIcon.isEnabled());
+        Assert.assertTrue(userMenuIcon.isDisplayed());
+        Assert.assertTrue(userMenuIcon.isEnabled());
+        Assert.assertTrue(footer.isDisplayed());
+    }
     public void clickOnElement (WebElement element){
 
         WebDriverWait wait = new WebDriverWait(driver, WAIT);
@@ -53,6 +76,13 @@ public class StockBrokerCommon {
         wait.until(ExpectedConditions.elementToBeClickable(element));
         element.click();
 
+    }
+    public void enterText(WebElement element, String text){
+        WebDriverWait wait = new WebDriverWait(driver, WAIT);
+        wait.until(ExpectedConditions.visibilityOf(element));
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+        element.clear();
+        element.sendKeys(text);
     }
     public void hoverOverElement(WebElement element){
         Actions actions = new Actions(driver);
@@ -83,17 +113,6 @@ public class StockBrokerCommon {
     public void backToDashBoard(){
         waiting(logo);
         clickOnElement(logo);
-    }
-    public void verifyCommons(){
-        Assert.assertTrue(logo.isDisplayed());
-        Assert.assertTrue(logo.isEnabled());
-        Assert.assertTrue(sidebarToggle.isDisplayed());
-        Assert.assertTrue(sidebarToggle.isEnabled());
-        Assert.assertTrue(searchIcon.isDisplayed());
-        Assert.assertTrue(searchIcon.isEnabled());
-        Assert.assertTrue(userMenuIcon.isDisplayed());
-        Assert.assertTrue(userMenuIcon.isEnabled());
-        Assert.assertTrue(footer.isDisplayed());
     }
     public void closeSearch() {
         clickOnElement(closeSearch);
