@@ -78,11 +78,16 @@ public class StockBrokerCommon {
 
     }
     public void enterText(WebElement element, String text){
-        WebDriverWait wait = new WebDriverWait(driver, WAIT);
-        wait.until(ExpectedConditions.visibilityOf(element));
-        wait.until(ExpectedConditions.elementToBeClickable(element));
-        element.clear();
-        element.sendKeys(text);
+        try{
+            WebDriverWait wait = new WebDriverWait(driver, WAIT);
+            wait.until(ExpectedConditions.visibilityOf(element));
+            wait.until(ExpectedConditions.elementToBeClickable(element));
+            element.clear();
+            element.sendKeys(text);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
     public void hoverOverElement(WebElement element){
         Actions actions = new Actions(driver);
